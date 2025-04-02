@@ -5,13 +5,13 @@
     class="pa-4"
     elevation="0"
   >
-    <v-app-bar-title>
+    <v-app-bar-title class="font-weight-regular">
       <v-icon
         size="28"
         class="mr-1 pb-1"
         color="black"
       >
-        mdi-calendar-check
+        mdi-circle-outline
       </v-icon>HabitManager
     </v-app-bar-title>
 
