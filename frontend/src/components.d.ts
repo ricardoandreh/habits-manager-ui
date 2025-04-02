@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppContentIa: typeof import('./components/AppContentIa.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    AppModalSettings: typeof import('./components/AppModalSettings.vue')['default']
     AppNavbar: typeof import('./components/AppNavbar.vue')['default']
     AppTaskCategories: typeof import('./components/AppTaskCategories.vue')['default']
     AppTaskList: typeof import('./components/AppTaskList.vue')['default']

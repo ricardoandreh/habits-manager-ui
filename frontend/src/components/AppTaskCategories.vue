@@ -5,13 +5,19 @@
     fluid
     class="pa-0 pr-8"
   >
-    <v-card class="pa-2" elevation="0">
-      <v-list>
+    <v-card
+      class="pa-2"
+      elevation="0"
+      rounded="xl"
+    >
+      <v-list class="bg-transparent">
         <v-list-item
-          v-for="(progress, index) in progressData"
+          v-for="(progress, index) in taskStore.progress"
           :key="index"
         >
-          <v-list-item-title class="pb-2">{{ progress.title }}</v-list-item-title>
+          <v-list-item-title class="pb-2">
+            {{ progress.title }}
+          </v-list-item-title>
           <v-progress-linear
             :model-value="progress.value"
             :color="progress.color"
@@ -24,20 +30,11 @@
   </v-container>
 </template>
     
-  <script lang="ts" setup>
-import { ref } from 'vue';
+<script lang="ts" setup>
+  import { useTaskStore } from '@/stores/taskStore';
+
+  const taskStore = useTaskStore()
+</script>
+
+<style scoped></style>
   
-  interface Progress {
-    title: string;
-    value: number;
-    color: string;
-  }
-  
-  const progressData = ref<Progress[]>([
-    { title: "Movimento e Vitalidade", value: 70, color: "indigo" },
-    { title: "Mente Ativa e Criativa", value: 85, color: "amber" },
-    { title: "Recarga e Renovação", value: 60, color: "black" },
-  ]);</script>
-  
-  <style scoped></style>
-    
