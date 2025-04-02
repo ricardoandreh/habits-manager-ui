@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="transparent"
+    color="white"
     density="compact"
     class="pa-4"
     elevation="0"
