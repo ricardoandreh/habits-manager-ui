@@ -9,13 +9,16 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppContentIa: typeof import('./components/AppContentIa.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
+    AppFormTasks: typeof import('./components/AppFormTasks.vue')['default']
     AppModalSettings: typeof import('./components/AppModalSettings.vue')['default']
     AppNavbar: typeof import('./components/AppNavbar.vue')['default']
+    AppSettingsList: typeof import('./components/AppSettingsList.vue')['default']
     AppTaskCategories: typeof import('./components/AppTaskCategories.vue')['default']
     AppTaskList: typeof import('./components/AppTaskList.vue')['default']
     AppTaskProgress: typeof import('./components/AppTaskProgress.vue')['default']
     AppWelcome: typeof import('./components/AppWelcome.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    ModalSettingsList: typeof import('./components/ModalSettingsList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

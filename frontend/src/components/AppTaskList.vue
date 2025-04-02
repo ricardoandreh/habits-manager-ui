@@ -9,7 +9,10 @@
       color="light-blue-lighten-5" 
       rounded="xl"
     >
-      <v-list class="pa-0 bg-transparent">
+      <v-list
+        v-if="taskStore.tasks.length > 0" 
+        class="pa-0 bg-transparent"
+      >
         <v-list-item
           v-for="(task, index) in taskStore.tasks"
           :key="index"
@@ -72,6 +75,20 @@
           </template>
         </v-list-item>
       </v-list>
+      <div 
+        v-else
+        style="min-height: 400px;"
+        class="pa-0 bg-transparent d-flex justify-center align-center text-black text-h6 font-weight-regular"
+      >
+        <v-icon
+          size="48"
+          class="mr-2 text-brown"
+        >
+        mdi-package-variant
+        </v-icon>
+  
+        Clique no botão de configurações e adicione seus hábitos.
+      </div>
     </v-card>
   </v-container>
 </template>

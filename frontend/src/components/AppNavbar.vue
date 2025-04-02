@@ -33,15 +33,6 @@
           </v-icon>
         </template>
       </v-tooltip>
-      <app-modal-settings
-        :is-open="isSettingsModalOpen"
-        title="Configurações"
-        @confirm="handleSettingsConfirm"
-        @cancel="handleSettingsCancel"
-      >
-        <p>Configurações do sistema</p>
-      </app-modal-settings>
-
       <v-tooltip
         location="bottom"
         text="Perfil"
@@ -58,6 +49,11 @@
         </template>
       </v-tooltip>
     </template>
+    <app-modal-settings
+      :is-open="isSettingsModalOpen"
+      title="Configurações"
+      @update="handleSettingsCancel"
+    />
   </v-app-bar>
 </template>
 
@@ -66,12 +62,8 @@ import { ref } from 'vue';
 
 const isSettingsModalOpen = ref(false);
 
-const handleSettingsConfirm = () => {
-  isSettingsModalOpen.value = false;
-};
-
-const handleSettingsCancel = () => {
-  isSettingsModalOpen.value = false;
+const handleSettingsCancel = ($event: boolean) => {
+  isSettingsModalOpen.value = $event;
 };
 </script>
 

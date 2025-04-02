@@ -7,12 +7,12 @@ export interface ITask {
   icon: string;
   color: string;
   completed: boolean;
-  type: 'Movement' | 'Vitality' | 'ActiveMind' | 'Recharge'
+  type: 'Movement' | 'ActiveMind' | 'Recharge' | ''
 }
 
 interface IProgress {
   title: string;
-  type: 'Movement' | 'ActiveMind' | 'Recharge'
+  type: 'Movement' | 'ActiveMind' | 'Recharge' | ''
   value: number;
   color: string;
 }
