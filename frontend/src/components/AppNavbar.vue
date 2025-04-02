@@ -1,39 +1,32 @@
 <template>
-  <nav class="app-navbar">
-    <div class="navbar-content">
-      <div class="d-flex align-center">
-        <v-tooltip location="bottom">
-          <template #activator="{ props }">
-            <v-icon
-              v-bind="props"
-              color="blue"
-              size="44"
-              icon="mdi-account-circle"
-              @click="toggleDropdown"
-            />
-          </template>
-          <span>Ir para conta do usuário</span>
-        </v-tooltip>
-      </div>
-    </div>
-  </nav>
+  <v-app-bar
+    color="white"
+    density="compact"
+    class="pa-4"
+    elevation="0"
+  >
+    <v-app-bar-title class="font-weight-regular">
+      <v-icon
+        size="28"
+        class="mr-1 pb-1"
+        color="black"
+      >
+        mdi-circle-outline
+      </v-icon>HabitManager
+    </v-app-bar-title>
+
+    <template #append>
+      <v-icon
+        class="mr-2"
+        size="32"
+        color="black"
+      >
+        mdi-account-circle
+      </v-icon>
+    </template>
+  </v-app-bar>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
+<script lang="ts" setup></script>
 
-const dropdownOpen = ref(false);
-
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value;
-};
-</script>
-
-<style scoped>
-.app-navbar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 2em;
-  background-color: transparent;
-}
-</style>
+<style scoped></style>
