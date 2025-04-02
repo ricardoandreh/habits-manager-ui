@@ -1,9 +1,11 @@
 <template>
+  <app-navbar />
+
   <v-main>
     <router-view />
   </v-main>
 
-  <AppFooter />
+  <app-footer />
 </template>
 
 <script lang="ts" setup>
