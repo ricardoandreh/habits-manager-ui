@@ -1,55 +1,34 @@
 <template>
   <v-footer
     height="60"
-    app
-    class="bg-transparent"
+    class="bg-transparent mt-4"
   >
     <div
-      class="d-flex justify-end ga-2 pa-4"
-      style="position: absolute; right: 16px"
+      class="d-flex flex-column align-center justify-center w-100"
     >
+      <div
+        class="text-caption-2"
+        v-bind="props"
+      >
+        Projeto Frontend - DEVOPS
+      </div>
       <v-tooltip
         location="top"
-        text="Tarefas Pendentes"
+        text="Melhor Equipe"
       >
         <template #activator="{ props }">
-          <div v-bind="props" class="d-flex align-center ga-2">
-            <v-icon
-              color="blue"
-              size="32"
-              icon="mdi-circle-outline"
-            />
-            <span class="text-h5 text-blue">
-              {{ taskStore.incompletedTasks.length }}
-            </span>
-          </div>
-        </template>
-      </v-tooltip>
-      <v-tooltip
-        location="top"
-        text="Tarefas Concluídas"
-      >
-        <template #activator="{ props }">
-          <div v-bind="props" class="d-flex align-center ga-2">
-            <v-icon
-              color="green"
-              size="32"
-              icon="mdi-check-circle-outline"
-            />
-            <span class="text-h5 text-green">
-              {{ taskStore.completedTasks.length }}
-            </span>
-          </div>
+          <span
+            class="d-block text-caption text-disabled pt-1"
+            v-bind="props"
+          >
+            Albano, Ricardo, Gomes e Paulão
+          </span>
         </template>
       </v-tooltip>
     </div>
   </v-footer>
 </template>
 
-<script setup lang="ts">
-import { useTaskStore } from '@/stores/taskStore';
-
-const taskStore = useTaskStore();
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="css"></style>
