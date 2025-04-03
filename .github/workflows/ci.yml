@@ -5,8 +5,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,22 +32,9 @@ jobs:
       - name: Rodar build da aplicação
         run: npm run build
 
-      # - name: Rodar testes unitários com Vitest
-      #   run: npm run test:unit
-
-      # - name: Rodar testes end-to-end (caso tenha Cypress)
-      #   run: npm run test:e2e
-      #   continue-on-error: true # Evita falha total caso o Cypress esteja configurado para rodar localmente
-
-      # - name: Verificar linting
-      #   run: npm run lint
-
-      # - name: Verificar se os arquivos PWA foram gerados corretamente
-      #   run: |
-      #     ls -lah dist/ | grep 'manifest.json\|service-worker.js'
-
-      - name: Upload do build como artefato (opcional)
-        uses: actions/upload-artifact@v4
+      - name: Deploy para GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          name: dist
-          path: dist/
+          branch: gh-pages  
+          folder: dist  
+
