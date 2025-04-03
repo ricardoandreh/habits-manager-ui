@@ -56,13 +56,13 @@ Indicado para indivíduos que buscam melhorar sua rotina e produtividade, bem co
 2. Instale as dependências:
 
     ```sh
-    pnpm install
+    npm install
     ```
 
 3. Execute o servidor:
 
     ```sh
-    pnpm dev
+    npm run dev
     ```
 
 ## Licença
