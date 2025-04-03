@@ -38,6 +38,13 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
+    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
+    Vuetify({
+      autoImport: true,
+      styles: {
+        configFile: 'src/styles/settings.scss',
+      },
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
@@ -74,13 +81,6 @@ export default defineConfig({
         ]
       }
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
-    Vuetify({
-      autoImport: true,
-      styles: {
-        configFile: 'src/styles/settings.scss',
-      },
-    }),
     Fonts({
       google: {
         families: [ {
@@ -106,7 +106,7 @@ export default defineConfig({
     ],
   },
   server: {
-    port: 3000,
+    port: 3001,
   },
   css: {
     preprocessorOptions: {
