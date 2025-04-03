@@ -1,0 +1,50 @@
+name: habits-manager-ui
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar build da aplicação
+        run: npm run build
+
+      # - name: Rodar testes unitários com Vitest
+      #   run: npm run test:unit
+
+      # - name: Rodar testes end-to-end (caso tenha Cypress)
+      #   run: npm run test:e2e
+      #   continue-on-error: true # Evita falha total caso o Cypress esteja configurado para rodar localmente
+
+      # - name: Verificar linting
+      #   run: npm run lint
+
+      # - name: Verificar se os arquivos PWA foram gerados corretamente
+      #   run: |
+      #     ls -lah dist/ | grep 'manifest.json\|service-worker.js'
+
+      - name: Upload do build como artefato (opcional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/

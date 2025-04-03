@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
+.new-font {
+    font-family: 'Comfortaa', cursive;
+    font-weight: 700 !important;
+}
+
+// .fullscreen-card {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     z-index: 9999;
+//     display: block;
+//     margin: 0 !important;
+//     padding: 0 !important;
+// }
+
+@media screen and (min-width: 1400px) {
+    .width-container {
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+        padding: 4em !important;
+    }
+}
