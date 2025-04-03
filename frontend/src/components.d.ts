@@ -17,8 +17,6 @@ declare module 'vue' {
     AppTaskList: typeof import('./components/AppTaskList.vue')['default']
     AppTaskProgress: typeof import('./components/AppTaskProgress.vue')['default']
     AppWelcome: typeof import('./components/AppWelcome.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
-    ModalSettingsList: typeof import('./components/ModalSettingsList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

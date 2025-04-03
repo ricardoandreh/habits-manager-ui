@@ -8,7 +8,6 @@
     >
       <div
         class="text-caption"
-        v-bind="props"
       >
         Projeto Frontend - DEVOPS
       </div>
