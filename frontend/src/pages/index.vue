@@ -1,6 +1,6 @@
 <template>
   <div
-    class="ma-4 pa-4 w-100"
+    class="ma-4 pa-4 width-container"
   >
     <app-welcome />
     <v-row
@@ -34,4 +34,5 @@
 </script>
 
 <style scoped>
+
 </style>

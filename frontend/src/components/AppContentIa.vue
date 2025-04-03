@@ -7,24 +7,33 @@
       class="pa-4 text-left w-100"
       elevation="0"
     >
-      <v-btn
-        class="d-flex justify-center align-center"
-        color="blue"
-        text
-        block
-        rounded
-        height="50"
-        width="100%"
-        @click="showDialog = true"
+      <v-tooltip
+        location="bottom"
+        text="Aproveite para ler mais sobre os hábito que você está criando!"
       >
-        <v-icon
-          class="mr-3"
-          size="20"
-        >
-          mdi-lightbulb-on
-        </v-icon>
-        Dica do dia
-      </v-btn>
+        <template #activator="{ props }">
+          <v-btn
+            class="d-flex justify-center align-center"
+            color="blue"
+            variant="flat"
+            text
+            block
+            v-bind="props"
+            rounded
+            height="50"
+            width="100%"
+            @click="showDialog = true"
+          >
+            <v-icon
+              class="mr-3"
+              size="20"
+            >
+              mdi-lightbulb-on
+            </v-icon>
+            Dica do dia
+          </v-btn>
+        </template>
+      </v-tooltip>
       <v-dialog
         v-model="showDialog"
         max-width="600"
