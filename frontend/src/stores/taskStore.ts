@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
-import type { ITask, ITaskState, IProgress } from "@/types/taskType";
+import type { ITask, ITaskState } from "@/types/taskType";
 import { TaskService } from "@/services/taskService";
 
 export const useTaskStore = defineStore("task", () => {
@@ -8,63 +8,7 @@ export const useTaskStore = defineStore("task", () => {
 
   const state: ITaskState = reactive({
     loading: false,
-    tasks: [
-      {
-        id: "1",
-        title: "Corrida matinal",
-        time: "7:00",
-        location: "Parque",
-        duration: "45min",
-        icon: "mdi-run",
-        color: "yellow",
-        completed: true,
-        type: "Movement",
-      },
-      {
-        id: "2",
-        title: "1,5L de água por dia",
-        time: "O dia todo",
-        location: "",
-        duration: "",
-        icon: "mdi-water",
-        color: "cyan-darken-1",
-        completed: true,
-        type: "Movement",
-      },
-      {
-        id: "3",
-        title: "Trabalho",
-        time: "8:30",
-        location: "Escritório",
-        duration: "8h",
-        icon: "mdi-briefcase",
-        color: "blue",
-        completed: false,
-        type: "ActiveMind",
-      },
-      {
-        id: "4",
-        title: "Sessão na academia",
-        time: "18:00",
-        location: "Academia",
-        duration: "1h",
-        icon: "mdi-dumbbell",
-        color: "red",
-        completed: false,
-        type: "Movement",
-      },
-      {
-        id: "5",
-        title: "Jantar com a família",
-        time: "20:00",
-        location: "Casa",
-        duration: "",
-        icon: "mdi-home-variant-outline",
-        color: "purple",
-        completed: false,
-        type: "Recharge",
-      },
-    ],
+    tasks: [ { "title": "Teste", "time": "12:03", "location": "asdfasdf", "duration": "1234", "icon": { "label": "Academia", "value": "mdi-dumbbell" }, "color": "#000000", "completed": false, "id": "", "type": "ActiveMind" }, { "title": "asdfasdf", "time": "12:34", "location": "mdi-walk", "duration": "Mente Ativa e Criativa", "icon": { "label": "Trabalho", "value": "mdi-briefcase" }, "color": "#FF0000", "completed": false, "id": "", "type": "Movement" }, { "title": "qwerqw", "time": "23:04", "location": "qwer", "duration": "qwer", "icon": { "label": "Caminhada", "value": "mdi-walk" }, "color": "#FFFFFF26", "completed": false, "id": "", "type": "Recharge" }, { "title": "casa", "time": "23:04", "location": "qwerqwe", "duration": "qwer", "icon": { "label": "Meditar", "value": "mdi-yoga" }, "color": "#9FA5708D", "completed": false, "id": "", "type": "Recharge" }, { "title": "qwerqwer", "time": "21:34", "location": "qwer", "duration": "qw", "icon": { "label": "Caminhada", "value": "mdi-walk" }, "color": "#000000", "completed": false, "id": "", "type": "Recharge" }, { "title": "Teste", "time": "12:03", "location": "asdfasdf", "duration": "1234", "icon": { "label": "Academia", "value": "mdi-dumbbell" }, "color": "#000000", "completed": false, "id": "", "type": "ActiveMind" }, { "title": "asdfasdf", "time": "12:34", "location": "mdi-walk", "duration": "Mente Ativa e Criativa", "icon": { "label": "Trabalho", "value": "mdi-briefcase" }, "color": "#FF0000", "completed": false, "id": "", "type": "Movement" }, { "title": "qwerqw", "time": "23:04", "location": "qwer", "duration": "qwer", "icon": { "label": "Caminhada", "value": "mdi-walk" }, "color": "#FFFFFF26", "completed": false, "id": "", "type": "Recharge" }, { "title": "casa", "time": "23:04", "location": "qwerqwe", "duration": "qwer", "icon": { "label": "Meditar", "value": "mdi-yoga" }, "color": "#9FA5708D", "completed": false, "id": "", "type": "Recharge" }, { "title": "qwerqwer", "time": "21:34", "location": "qwer", "duration": "qw", "icon": { "label": "Caminhada", "value": "mdi-walk" }, "color": "#000000", "completed": false, "id": "", "type": "Recharge" }  ],
     progress: [
       { title: "Movimento e Vitalidade", value: 20,type: 'Movement', color: "light-green" },
       { title: "Mente Ativa e Criativa", value: 0,type: 'ActiveMind', color: "light-blue-lighten-3" },

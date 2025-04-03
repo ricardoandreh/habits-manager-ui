@@ -4,7 +4,10 @@ export interface ITask {
   time: string;
   location: string;
   duration: string;
-  icon: string;
+  icon: {
+    label: string,
+    value: string, 
+  }
   color: string;
   completed: boolean;
   type: 'Movement' | 'ActiveMind' | 'Recharge' | ''

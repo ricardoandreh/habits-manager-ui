@@ -13,7 +13,7 @@
             class="mr-2"
           >
             <v-icon size="18">
-              {{ task.icon }}
+              {{ task.icon.value }}
             </v-icon>
           </v-avatar>
 

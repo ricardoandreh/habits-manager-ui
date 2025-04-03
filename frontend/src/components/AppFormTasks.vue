@@ -83,15 +83,15 @@
                   label="Ícone"
                   :items="iconOptions"
                   item-title="label"
-                  item-value="icon"
+                  item-value="value"
                   return-object
                   required
                 >
                   <template #selection="{ item }">
-                    <v-icon class="mr-2">
+                    <v-icon class="mr-3">
                       {{ item.value }}
                     </v-icon>
-                    {{ item.label }}
+                    {{ item.title }}
                   </template>
                   <template #item="{ props, item }">
                     <v-list-item v-bind="props">
@@ -114,7 +114,7 @@
                   label="Tipo"
                   :items="taskStore.progress"
                   item-title="title"
-                  item-value="title"
+                  item-value="type"
                   required
                 >
                   <template #selection="{ item }">
@@ -161,15 +161,15 @@ defineEmits(["cancel"]);
 
 const taskStore = useTaskStore();
 
-const iconOptions: { label: string; icon: string }[] = [
-  { label: "Caminhada", icon: "mdi-walk" },
-  { label: "Academia", icon: "mdi-dumbbell" },
-  { label: "Trabalho", icon: "mdi-briefcase" },
-  { label: "Ler", icon: "mdi-book-open" },
-  { label: "Beber água", icon: "mdi-water" },
-  { label: "Meditar", icon: "mdi-yoga" },
-  { label: "Dormir", icon: "mdi-sleep" },
-  { label: "Circulo", icon: "mdi-circle" },
+const iconOptions: { label: string; value: string }[] = [
+  { label: "Caminhada", value: "mdi-walk" },
+  { label: "Academia", value: "mdi-dumbbell" },
+  { label: "Trabalho", value: "mdi-briefcase" },
+  { label: "Ler", value: "mdi-book-open" },
+  { label: "Beber água", value: "mdi-water" },
+  { label: "Meditar", value: "mdi-yoga" },
+  { label: "Dormir", value: "mdi-sleep" },
+  { label: "Circulo", value: "mdi-circle" },
 ];
 
 const tasks = ref<ITask[]>(taskStore.tasks);
@@ -179,7 +179,10 @@ const newTask = ref<ITask>({
   time: "",
   location: "",
   duration: "",
-  icon: "",
+  icon: {
+    label: "",
+    value: ""
+  },
   color: "#000000",
   completed: false,
   id: "",
@@ -199,7 +202,10 @@ const resetForm = () => {
     time: "",
     location: "",
     duration: "",
-    icon: "",
+    icon: {
+      label: "",
+      value: ""
+    },
     color: "#000000",
     completed: false,
     id: "",

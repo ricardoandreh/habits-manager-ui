@@ -23,7 +23,7 @@
               :color="task.color"
               size="40"
             >
-              <v-icon>{{ task.icon }}</v-icon>
+              <v-icon>{{ task.icon.value }}</v-icon>
             </v-avatar>
           </template>
           <v-list-item-title class="pb-1">
@@ -84,7 +84,7 @@
           size="48"
           class="mr-2 text-brown"
         >
-        mdi-package-variant
+          mdi-package-variant
         </v-icon>
   
         Clique no botão de configurações e adicione seus hábitos.
