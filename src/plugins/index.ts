@@ -7,9 +7,9 @@ import type { App } from 'vue'
 
 export function registerPlugins (app: App) {
   app
+    .use(pinia)
     .use(vuetify)
     .use(router)
-    .use(pinia)
 
   app.config.globalProperties.$axios = api
 }
