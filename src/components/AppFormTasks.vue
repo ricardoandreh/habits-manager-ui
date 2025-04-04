@@ -199,61 +199,27 @@
 import { ref } from "vue";
 import { useTaskStore } from "@/stores/taskStore";
 import type { ITask } from "@/types/taskType";
+import { NEW_OBJECTS } from "@/constants/newObjects";
 
 defineEmits(["cancel"]);
 
 const taskStore = useTaskStore();
 
-const iconOptions: { label: string; value: string }[] = [
-  { label: "Caminhada", value: "mdi-walk" },
-  { label: "Academia", value: "mdi-dumbbell" },
-  { label: "Trabalho", value: "mdi-briefcase" },
-  { label: "Ler", value: "mdi-book-open" },
-  { label: "Beber água", value: "mdi-water" },
-  { label: "Meditar", value: "mdi-yoga" },
-  { label: "Dormir", value: "mdi-sleep" },
-  { label: "Circulo", value: "mdi-circle" },
-];
-
-const tasks = ref<ITask[]>(taskStore.tasks);
+const iconOptions: { label: string; value: string }[] = taskStore.icons;
 
 const newTask = ref<ITask>({
-  title: "",
-  time: "",
-  location: "",
-  duration: "",
-  icon: {
-    label: "",
-    value: ""
-  },
-  color: "blue",
-  completed: false,
-  id: "",
-  type: "",
+  ...NEW_OBJECTS.TASK,
 });
 
 const addTask = () => {
   if (newTask.value.title && newTask.value.icon) {
-    tasks.value.push({ ...newTask.value });
+    taskStore.createTask({ ...newTask.value });
     resetForm();
   }
 };
 
 const resetForm = () => {
-  newTask.value = {
-    title: "",
-    time: "",
-    location: "",
-    duration: "",
-    icon: {
-      label: "",
-      value: ""
-    },
-    color: "#000000",
-    completed: false,
-    id: "",
-    type: "",
-  };
+  newTask.value = { ...NEW_OBJECTS.TASK };
 };
 
 

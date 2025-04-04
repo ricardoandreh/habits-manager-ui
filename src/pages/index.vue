@@ -1,4 +1,5 @@
 <template>
+  <app-navbar />
   <div
     class="ma-4 pa-4 width-container"
   >
@@ -28,6 +29,7 @@
       </v-col>
     </v-row>
   </div>
+  <app-footer />
 </template>
 
 <script setup lang="ts">

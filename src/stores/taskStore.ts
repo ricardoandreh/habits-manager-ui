@@ -8,11 +8,21 @@ export const useTaskStore = defineStore("task", () => {
 
   const state: ITaskState = reactive({
     loading: false,
-    tasks: [ { "title": "Teste", "time": "12:03", "location": "asdfasdf", "duration": "1234", "icon": { "label": "Academia", "value": "mdi-dumbbell" }, "color": "#000000", "completed": false, "id": "", "type": "ActiveMind" }, { "title": "asdfasdf", "time": "12:34", "location": "mdi-walk", "duration": "Mente Ativa e Criativa", "icon": { "label": "Trabalho", "value": "mdi-briefcase" }, "color": "#FF0000", "completed": false, "id": "", "type": "Movement" }, { "title": "qwerqw", "time": "23:04", "location": "qwer", "duration": "qwer", "icon": { "label": "Caminhada", "value": "mdi-walk" }, "color": "#FFFFFF26", "completed": false, "id": "", "type": "Recharge" }, { "title": "casa", "time": "23:04", "location": "qwerqwe", "duration": "qwer", "icon": { "label": "Meditar", "value": "mdi-yoga" }, "color": "#9FA5708D", "completed": false, "id": "", "type": "Recharge" }],
+    tasks: [],
     progress: [
       { title: "Movimento e Vitalidade", value: 20,type: 'Movement', color: "light-green" },
       { title: "Mente Ativa e Criativa", value: 0,type: 'ActiveMind', color: "light-blue-lighten-3" },
       { title: "Recarga e Renovação", value: 0,type: 'Recharge', color: "deep-purple-accent-1" },
+    ],
+    icons: [
+      { label: "Caminhada", value: "mdi-walk" },
+      { label: "Academia", value: "mdi-dumbbell" },
+      { label: "Trabalho", value: "mdi-briefcase" },
+      { label: "Ler", value: "mdi-book-open" },
+      { label: "Beber água", value: "mdi-water" },
+      { label: "Meditar", value: "mdi-yoga" },
+      { label: "Dormir", value: "mdi-sleep" },
+      { label: "Circulo", value: "mdi-circle" },
     ],
     error: null,
   });
@@ -26,6 +36,7 @@ export const useTaskStore = defineStore("task", () => {
   const incompletedTasks = computed(() =>
     state.tasks.filter((task) => !task.completed)
   );
+  const icons = computed(() => state.icons);
   const progress = computed(() => {
     return state.progress.map((progressItem) => {
       const completedTasks = state.tasks.filter(
@@ -70,8 +81,12 @@ export const useTaskStore = defineStore("task", () => {
   const deleteTask = async (task: ITask) => {
     setLoading(true);
     try {
-      const response = await taskService.deleteTask(task.id.toString());
-      state.tasks = response;
+      if (task.id !== undefined) {
+        const response = await taskService.deleteTask(task.id.toString());
+        state.tasks = response;
+      } else {
+        throw new Error("Task ID is undefined");
+      }
     } catch (err) {
       state.error = err;
     } finally {
@@ -83,7 +98,7 @@ export const useTaskStore = defineStore("task", () => {
     setLoading(true);
     try {
       const response = await taskService.updateTask(
-        oldTask.id.toString(),
+        oldTask.id ? oldTask.id.toString() : "",
         updatedTask
       );
       const index = state.tasks.findIndex((task) => task.id === oldTask.id);
@@ -107,6 +122,7 @@ export const useTaskStore = defineStore("task", () => {
     isLoading,
     tasks,
     error,
+    icons,
     progress,
     completedTasks,
     incompletedTasks,
