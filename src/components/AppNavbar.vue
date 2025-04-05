@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    color="white"
+    :color="isDark ? 'grey-darken-4' : 'white'"
     density="compact"
     class="pa-4"
     elevation="0"
@@ -9,23 +9,31 @@
       <v-icon
         size="26"
         class="mr-1 pb-2"
-        color="black"
+        :color="isDark ? 'white' : 'black'"
       >
         mdi-circle-outline
       </v-icon>
-      HabitManager
+      <span :class="isDark ? 'text-white' : 'text-black'">HabitManager</span>
     </v-app-bar-title>
 
     <template #append>
-      <v-tooltip
-        location="bottom"
-        text="Configurações"
-      >
+      <!-- 🌗 Switch para Dark Mode -->
+      <v-switch
+        v-model="isDark"
+        hide-details
+        inset
+        density="compact"
+        class="mr-2"
+        :color="isDark ? 'white' : 'black'"
+        :label="isDark ? '🌙' : '☀️'"
+      />
+
+      <v-tooltip location="bottom" text="Configurações">
         <template #activator="{ props }">
           <v-icon
             class="mr-3 cursor-pointer"
             size="30"
-            color="grey"
+            :color="isDark ? 'grey-lighten-2' : 'grey'"
             v-bind="props"
             @click="isSettingsModalOpen = true"
           >
@@ -33,15 +41,13 @@
           </v-icon>
         </template>
       </v-tooltip>
-      <v-tooltip
-        location="bottom"
-        text="Perfil"
-      >
+
+      <v-tooltip location="bottom" text="Perfil">
         <template #activator="{ props }">
           <v-icon
             class="mr-2 cursor-pointer"
             size="32"
-            color="black"
+            :color="isDark ? 'white' : 'black'"
             v-bind="props"
           >
             mdi-account-circle
@@ -49,6 +55,7 @@
         </template>
       </v-tooltip>
     </template>
+
     <app-modal-settings
       :is-open="isSettingsModalOpen"
       title="Configurações"
@@ -58,13 +65,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue'
+import { useTheme } from 'vuetify'
 
-const isSettingsModalOpen = ref(false);
+const isSettingsModalOpen = ref(false)
 
 const handleSettingsCancel = ($event: boolean) => {
-  isSettingsModalOpen.value = $event;
-};
+  isSettingsModalOpen.value = $event
+}
+
+// 🌙 Dark Mode Toggle
+const theme = useTheme()
+const isDark = ref(theme.global.current.value.dark)
+
+watch(isDark, (val) => {
+  theme.global.name.value = val ? 'dark' : 'light'
+})
 </script>
 
 <style scoped></style>
