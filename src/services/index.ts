@@ -1,6 +1,10 @@
 import api from '@/plugins/axios'
 import type { AxiosInstance } from 'axios';
 
+export interface IResponse<T> {
+    data: T;
+}
+
 export class BaseService {
     protected api: AxiosInstance = api
 

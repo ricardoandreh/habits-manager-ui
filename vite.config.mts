@@ -1,4 +1,3 @@
-// Plugins
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import Fonts from 'unplugin-fonts/vite'
@@ -6,13 +5,11 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { VitePWA } from 'vite-plugin-pwa'
+// import { VitePWA } from 'vite-plugin-pwa'
 
-// Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     VueRouter({
@@ -38,49 +35,48 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
       autoImport: true,
       styles: {
         configFile: 'src/styles/settings.scss',
       },
     }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      devOptions: { enabled: true },
-      manifest: {
-        name: 'My Vuetify PWA',
-        short_name: 'VuetifyPWA',
-        description: 'A Progressive Web App with Vuetify',
-        theme_color: '#1976D2',
-        background_color: '#ffffff',
-        display: 'standalone',
-        icons: [
-          {
-            src: 'icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
-        ]
-      },
-      workbox: {
-        runtimeCaching: [
-          {
-            urlPattern: ({ request }) => request.destination === 'document',
-            handler: 'NetworkFirst'
-          },
-          {
-            urlPattern: ({ request }) => request.destination === 'script',
-            handler: 'CacheFirst'
-          }
-        ]
-      }
-    }),
+    // VitePWA({
+    //   registerType: 'autoUpdate',
+    //   devOptions: { enabled: true },
+    //   manifest: {
+    //     name: 'My Vuetify PWA',
+    //     short_name: 'VuetifyPWA',
+    //     description: 'A Progressive Web App with Vuetify',
+    //     theme_color: '#1976D2',
+    //     background_color: '#ffffff',
+    //     display: 'standalone',
+    //     icons: [
+    //       {
+    //         src: 'icons/icon-192x192.png',
+    //         sizes: '192x192',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'icons/icon-512x512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png'
+    //       }
+    //     ]
+    //   },
+    //   workbox: {
+    //     runtimeCaching: [
+    //       {
+    //         urlPattern: ({ request }) => request.destination === 'document',
+    //         handler: 'NetworkFirst'
+    //       },
+    //       {
+    //         urlPattern: ({ request }) => request.destination === 'script',
+    //         handler: 'CacheFirst'
+    //       }
+    //     ]
+    //   }
+    // }),
     Fonts({
       google: {
         families: [ {
@@ -106,7 +102,7 @@ export default defineConfig({
     ],
   },
   server: {
-    port: 3001,
+    port: 3000,
   },
   css: {
     preprocessorOptions: {

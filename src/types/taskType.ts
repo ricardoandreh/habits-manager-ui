@@ -1,5 +1,5 @@
 export interface ITask {
-  id: string;
+  id?: string;
   title: string;
   time: string;
   location: string;
@@ -24,5 +24,6 @@ export interface ITaskState {
   loading: boolean;
   tasks: Array<ITask>;
   progress: Array<IProgress>;
+  icons: Array<{ label: string; value: string }>;
   error: unknown;
 };
