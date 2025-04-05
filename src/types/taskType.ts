@@ -1,9 +1,8 @@
 export interface ITask {
   id?: string;
   title: string;
-  time: string;
+  date: string;
   location: string;
-  duration: string;
   icon: {
     label: string,
     value: string, 

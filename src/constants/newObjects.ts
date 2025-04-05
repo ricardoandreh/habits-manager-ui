@@ -1,9 +1,8 @@
 export const NEW_OBJECTS = {
     TASK: {
         title: "",
-        time: "",
+        date: "",
         location: "",
-        duration: "",
         icon: { label: "", value: "" },
         color: "",
         completed: false,
