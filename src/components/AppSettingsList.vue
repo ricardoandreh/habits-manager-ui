@@ -8,6 +8,7 @@
       hide-default-header
       items-per-page="-1"
       hide-default-footer
+      :no-data-text="'Nenhum item encontrado'"
     >
       <template #item="{ item, index }">
         <tr>
