@@ -8,7 +8,17 @@ export const useTaskStore = defineStore("task", () => {
 
   const state: ITaskState = reactive({
     loading: false,
-    tasks: [],
+    tasks: [{
+      id: "1",
+      title: "Caminhar",
+      date: "2023-10-01",
+      location: "Parque",
+      icon: { label: "Caminhada", value: "mdi-walk" },
+      color: "light-green",
+      completed: false,
+      type: "Movement",
+      description: "Caminhar no parque por 30 minutos",
+    }],
     progress: [
       { title: "Movimento e Vitalidade", value: 20,type: 'Movement', color: "light-green" },
       { title: "Mente Ativa e Criativa", value: 0,type: 'ActiveMind', color: "light-blue-lighten-3" },

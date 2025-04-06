@@ -7,6 +7,7 @@ export interface ITask {
     label: string,
     value: string, 
   }
+  description: string;
   color: string;
   completed: boolean;
   type: 'Movement' | 'ActiveMind' | 'Recharge' | ''

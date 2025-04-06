@@ -3,6 +3,7 @@ export interface IUser {
     name: string;
     email: string;
     token: string | null;
+    isDarkMode: boolean;
 }
   
 export interface IAuthState {
