@@ -19,6 +19,7 @@ export const useAuthStore = defineStore("auth", () => {
     const isAuthenticated = computed(() => !!state.user.token);
     const error = computed(() => state.error);
     const isDarkMode = computed(() => state.user.isDarkMode); 
+    const userId = computed(() => state.user.id);
 
     const setLoading = (loading: boolean) => {
         state.loading = loading;
@@ -39,35 +40,12 @@ export const useAuthStore = defineStore("auth", () => {
     };
 
     const logout = async () => {
-        try {
-            await authService.logout(); 
-        } catch (_) {}
         state.user = { ...NEW_OBJECTS.USER };
         state.error = null;
         sessionStorage.removeItem("user");
     };
-    
 
-    const initializeUser = async () => {
-        const storedUser = sessionStorage.getItem("user");
-        if (storedUser) {
-            try {
-                const parsed = JSON.parse(storedUser);
-                const isValid = await authService.validateToken(parsed.token)
-                if (isValid) {
-                    state.user = parsed;
-                } else {
-                    console.warn("Token inválido no localStorage");
-                    logout();
-                }
-            } catch (_) {
-                console.warn("Usuário inválido no localStorage");
-                logout();
-            }
-        }
-    };
-
-    const createAccount = async (user: IUser) => {
+    const createAccount = async (user: Partial<IUser>) => {
         setLoading(true);
         try {
             const response = await authService.createAccount(user);
@@ -81,7 +59,6 @@ export const useAuthStore = defineStore("auth", () => {
     }
 
     const toggleDarkMode = () => {
-        console.log('chegoyu')
         state.user.isDarkMode = !state.user.isDarkMode;
         if (state.user.isDarkMode) {
             document.documentElement.classList.add("dark");
@@ -93,16 +70,37 @@ export const useAuthStore = defineStore("auth", () => {
         localStorage.setItem("isDarkMode", JSON.stringify(state.user.isDarkMode));
     };
 
+    const checkUserLoggedIn = () => {
+        const user = sessionStorage.getItem("user");
+        const darkMode = localStorage.getItem("isDarkMode");
+        if (user) {
+            const parsedUser = JSON.parse(user);
+            state.user = { ...state.user, ...parsedUser };  
+            const parsedDarkMode = JSON.parse(darkMode || "false");
+            state.user.isDarkMode = parsedDarkMode;
+            if (parsedDarkMode) {
+                document.documentElement.classList.add("dark");
+                themeStore.global.name.value = "dark";
+            } else {
+                document.documentElement.classList.remove("dark");
+                themeStore.global.name.value = "light";
+            }
+            return true;
+        } 
+        return false;
+    };
+
     return {
         isLoading,
         isAuthenticated,
         error,
+        userId,
         isDarkMode,
         setLoading,
         login,
         logout,
-        initializeUser,
         createAccount,
         toggleDarkMode,
+        checkUserLoggedIn,
     };
 });

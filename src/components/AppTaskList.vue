@@ -6,7 +6,7 @@
     <v-card
       class="pa-6"
       elevation="0"
-      color="light-blue-lighten-5"
+      :color="authStore.isDarkMode ? 'blue-lighten-4' : 'light-blue-lighten-5'"
       rounded="xl"
     >
       <v-list
@@ -36,21 +36,30 @@
             </v-list-item-title>
 
             <v-list-item-subtitle class="text-medium-emphasis text-sm">
-              <span v-if="task.date">
+              <span
+                v-if="task.date"
+                :class="authStore.isDarkMode ? 'text-black' : 'text-blue-grey'"
+              >
                 <v-icon
                   size="18"
                   class="mr-1 text-blue"
                 >mdi-calendar</v-icon>
                 {{ task.date }}
               </span>
-              <span v-if="task.location">
+              <span
+                v-if="task.location"
+                :class="authStore.isDarkMode ? 'text-black' : 'text-blue-grey'"
+              >
                 <v-icon
                   size="18"
                   class="ml-4 mr-1 text-orange"
                 >mdi-map-marker</v-icon>
                 {{ task.location }}
               </span>
-              <span v-if="task.description">
+              <span
+                v-if="task.description"
+                :class="authStore.isDarkMode ? 'text-black' : 'text-blue-grey'"
+              >
                 <v-icon
                   size="18"
                   class="ml-4 mr-1 text-blue-grey"
@@ -101,8 +110,10 @@
 
 <script setup lang="ts">
 import { useTaskStore } from '@/stores/taskStore'
+import { useAuthStore } from '@/stores/authStore';
 
 const taskStore = useTaskStore()
+const authStore = useAuthStore()
 </script>
 
 <style scoped>

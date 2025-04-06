@@ -31,6 +31,7 @@
               class="mb-3"
               hide-details
               required
+              :rules="[v => !!v || 'Email é obrigatório']"
             />
 
             <v-text-field
@@ -42,6 +43,7 @@
               class="mb-3"
               hide-details
               required
+              :rules="[v => !!v || 'Senha é obrigatória']"
             />
 
             <div class="d-flex justify-space-between align-center mb-4">
@@ -69,6 +71,7 @@
             Não tem uma conta?
             <a
               href="#"
+              @click.prevent="$router.push('/user')"
               class="font-weight-medium"
             >Criar conta</a>
           </div>
@@ -80,17 +83,17 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/authStore";
 
+const authStore = useAuthStore();
 const email = ref("");
 const password = ref("");
 const remember = ref(false);
 
 const login = () => {
-  console.log("Login:", {
-    email: email.value,
-    password: password.value,
-    remember: remember.value,
-  });
+  if (email.value && password.value) {
+    authStore.login(email.value, password.value, remember.value);
+  }
 };
 </script>
 

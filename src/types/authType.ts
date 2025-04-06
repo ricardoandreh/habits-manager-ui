@@ -1,8 +1,10 @@
 export interface IUser {
-    id?: string;
-    name: string;
+    id?: number;
+    firstName: string;
+    lastName: string;
     email: string;
-    token: string | null;
+    password?: string;
+    token?: string | null;
     isDarkMode: boolean;
 }
   

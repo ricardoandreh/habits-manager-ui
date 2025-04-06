@@ -16,10 +16,10 @@ export const NEW_OBJECTS = {
         color: "blue",
     },
     USER: {
-        id: "",
-        name: "",
-        email: "",
-        isDarkMode: false,
-        token: null,
+        id: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        isDarkMode: false
     }
 };
