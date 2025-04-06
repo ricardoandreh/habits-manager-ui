@@ -16,7 +16,7 @@ export const NEW_OBJECTS = {
         color: "blue",
     },
     USER: {
-        id: "",
+        id: 0,
         name: "",
         email: "",
         isDarkMode: false,

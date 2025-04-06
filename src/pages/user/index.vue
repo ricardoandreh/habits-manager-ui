@@ -5,9 +5,17 @@
         fluid
         class="text-center pa-4"
       >
-        <h2 class="text-h5 font-weight-bold mb-6">
-          Criar Conta
-        </h2>
+        <div class="d-flex align-center justify-center mb-8">
+          <v-icon
+            size="26"
+            class="mr-1 d-block pb-9"
+          >
+            mdi-circle-outline
+          </v-icon>
+          <h2 class="font-weight-regular new-font">
+            HabitManager
+          </h2>
+        </div>
   
         <v-card
           class="form-card mx-auto px-6 py-8 elevation-0"

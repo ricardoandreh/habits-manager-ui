@@ -69,6 +69,7 @@
             Não tem uma conta?
             <a
               href="#"
+              @click.prevent="$router.push('/user')"
               class="font-weight-medium"
             >Criar conta</a>
           </div>
