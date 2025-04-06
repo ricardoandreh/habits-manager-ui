@@ -145,13 +145,26 @@
           <v-col
             cols="12"
             class="pr-2"
-            md="7"
+            md="3"
           >
             <v-text-field
               v-model="newTask.location"
               variant="outlined"
               label="Local"
               placeholder="Ex: Parque"
+              helper-text="Opcional"
+            />
+          </v-col>
+          <v-col
+            cols="12"
+            class="pr-2"
+            md="3"
+          >
+            <v-text-field
+              v-model="newTask.description"
+              variant="outlined"
+              label="Observação"
+              placeholder="Ex: Reunião"
               helper-text="Opcional"
             />
           </v-col>

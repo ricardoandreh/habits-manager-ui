@@ -1,39 +1,48 @@
 <template>
   <v-app-bar
-    :color="isDark ? 'grey-darken-4' : 'white'"
+    :color="authStore.isDarkMode ? 'grey-darken-4' : 'white'"
     density="compact"
     class="pa-4"
     elevation="0"
   >
-    <v-app-bar-title class="font-weight-regular new-font">
+    <v-app-bar-title class="font-weight-regular new-font logo">
       <v-icon
         size="26"
         class="mr-1 pb-2"
-        :color="isDark ? 'white' : 'black'"
+        :color="authStore.isDarkMode ? 'white' : 'black'"
       >
         mdi-circle-outline
       </v-icon>
-      <span :class="isDark ? 'text-white' : 'text-black'">HabitManager</span>
+      <span :class="authStore.isDarkMode ? 'text-white' : 'text-black'">HabitManager</span>
     </v-app-bar-title>
 
     <template #append>
-      <!-- 🌗 Switch para Dark Mode -->
+      <v-icon
+        size="26"
+        class="mr-2"
+        :color="authStore.isDarkMode ? 'yellow' : 'orange'"
+      >
+        {{ authStore.isDarkMode ? 'mdi-moon-waning-crescent' : 'mdi-white-balance-sunny' }}
+      </v-icon>
       <v-switch
-        v-model="isDark"
+        :model-value="authStore.isDarkMode"
         hide-details
         inset
         density="compact"
         class="mr-2"
-        :color="isDark ? 'white' : 'black'"
-        :label="isDark ? '🌙' : '☀️'"
+        :color="authStore.isDarkMode ? 'white' : 'black'"
+        @update:model-value="authStore.toggleDarkMode"
       />
 
-      <v-tooltip location="bottom" text="Configurações">
+      <v-tooltip
+        location="bottom"
+        text="Configurações"
+      >
         <template #activator="{ props }">
           <v-icon
             class="mr-3 cursor-pointer"
             size="30"
-            :color="isDark ? 'grey-lighten-2' : 'grey'"
+            :color="authStore.isDarkMode ? 'grey-lighten-2' : 'grey'"
             v-bind="props"
             @click="isSettingsModalOpen = true"
           >
@@ -42,15 +51,18 @@
         </template>
       </v-tooltip>
 
-      <v-tooltip location="bottom" text="Perfil">
+      <v-tooltip
+        location="bottom"
+        text="Logout"
+      >
         <template #activator="{ props }">
           <v-icon
             class="mr-2 cursor-pointer"
             size="32"
-            :color="isDark ? 'white' : 'black'"
+            :color="authStore.isDarkMode ? 'red' : 'red'"
             v-bind="props"
           >
-            mdi-account-circle
+            mdi-logout
           </v-icon>
         </template>
       </v-tooltip>
@@ -65,22 +77,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useTheme } from 'vuetify'
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
 
+const authStore = useAuthStore()
 const isSettingsModalOpen = ref(false)
 
 const handleSettingsCancel = ($event: boolean) => {
   isSettingsModalOpen.value = $event
 }
-
-// 🌙 Dark Mode Toggle
-const theme = useTheme()
-const isDark = ref(theme.global.current.value.dark)
-
-watch(isDark, (val) => {
-  theme.global.name.value = val ? 'dark' : 'light'
-})
 </script>
 
-<style scoped></style>
+<style scoped>
+
+.logo {
+  display: none !important;
+}
+
+@media screen and (min-width: 600px) {
+  .logo {
+    display: flex !important;
+  }
+}
+
+</style>

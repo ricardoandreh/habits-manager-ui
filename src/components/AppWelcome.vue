@@ -3,13 +3,20 @@
     <p
       class="text-h6 font-weight-light text-disabled mb-2"
     >
-      Dashboard
+      mateusalbano22@gmail.com
     </p>
     <p
-      class="text-h4 font-weight-light text-left mb-4"
+      class="text-h4 font-weight-light text-left mb-2"
     >
-      Bem-vindo, usuário!
+      Olá, Mateus!
     </p>
+    <p
+      class="text-h6 font-weight-light text-blue text-left mb-4"
+    >
+    
+    Seja bem-vindo ao Habit Tracker!
+    </p>
+    
   </div>
 </template>
   

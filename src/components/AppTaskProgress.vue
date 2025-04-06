@@ -12,14 +12,14 @@
         :model-value="taskStore.getProgress"
         size="80"
         width="6"
-        :color="taskStore.getProgress < 100 ? 'black' : 'green'"
+        :color="taskStore.getProgress < 100 ? (authStore.isDarkMode ? 'white' : 'black') : (authStore.isDarkMode ? 'lightgreen' : 'green')"
       >
         {{ taskStore.getProgress }}%
       </v-progress-circular>
       <p
         v-if="taskStore.getProgress < 100"
-        class="pl-8 text-black"
-        :class="taskStore.getProgress < 100 ? 'text-black' : 'text-green'"
+        class="pl-8"
+        :class="taskStore.getProgress < 100 ? (authStore.isDarkMode ? 'text-white' : 'text-black') : (authStore.isDarkMode ? 'text-lightgreen' : 'text-green')"
       >
         Vamos
         lá,
@@ -28,8 +28,8 @@
       </p>
       <p 
         v-else
-        class="pl-8 text-black"
-        :class="taskStore.getProgress < 100 ? 'text-black' : 'text-green'"
+        class="pl-8"
+        :class="taskStore.getProgress < 100 ? (authStore.isDarkMode ? 'text-white' : 'text-black') : (authStore.isDarkMode ? 'text-lightgreen' : 'text-green')"
       >
         Muito bem, mais um dia concluido!
       </p>
@@ -39,8 +39,10 @@
     
 <script setup lang="ts">
 import { useTaskStore } from '@/stores/taskStore';
+import { useAuthStore } from '@/stores/authStore';
 
 const taskStore = useTaskStore();
+const authStore = useAuthStore();
 </script>
 
 <style scoped>
