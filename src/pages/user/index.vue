@@ -5,9 +5,17 @@
         fluid
         class="text-center pa-4"
       >
-        <h2 class="text-h5 font-weight-bold mb-6">
-          Criar Conta
-        </h2>
+        <div class="d-flex align-center justify-center mb-8">
+          <v-icon
+            size="26"
+            class="mr-1 d-block pb-9"
+          >
+            mdi-circle-outline
+          </v-icon>
+          <h2 class="font-weight-regular new-font">
+            HabitManager
+          </h2>
+        </div>
   
         <v-card
           class="form-card mx-auto px-6 py-8 elevation-0"
@@ -85,6 +93,7 @@
               class="mb-4"
               hide-details
               required
+              :rules="[v => v === password || 'As senhas não coincidem']"
               @click:append-inner="showConfirmPassword = !showConfirmPassword"
             />
   
@@ -115,10 +124,13 @@
   </v-app>
 </template>
   
-  <script setup>
+<script setup lang="ts">
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import { useAuthStore } from '@/stores/authStore'
   
+
+  const authStore = useAuthStore()
   const firstName = ref('')
   const lastName = ref('')
   const email = ref('')
@@ -130,23 +142,27 @@
   const router = useRouter()
   
   const register = () => {
-    if (password.value !== confirmPassword.value) {
-      alert("Passwords do not match!")
-      return
+    if (firstName.value && lastName.value && email.value && password.value) {
+      const user = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+        password: password.value,
+      }
+      authStore.createAccount(user)
+        .then(() => {
+          router.push('/login')
+        })
+        .catch((error) => {
+          console.error('Erro ao registrar:', error)
+        })
+    } else {
+      console.error('Todos os campos são obrigatórios')
     }
-  
-    console.log('User created:', {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      password: password.value
-    })
-  
-    router.push('/login')
   }
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .v-main {
     min-height: 100vh;
     background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
@@ -155,10 +171,5 @@
   a {
     text-decoration: none;
   }
-  
-  /* Sombra personalizada no card */
-  .form-card {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  }
-  </style>
+</style>
   

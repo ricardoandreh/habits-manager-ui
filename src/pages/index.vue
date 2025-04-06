@@ -33,6 +33,20 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (authStore.checkUserLoggedIn()) {
+    router.push('/')
+  } else {
+    router.push('/login')
+  }
+})
 </script>
 
 <style scoped>

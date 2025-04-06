@@ -2,14 +2,17 @@ import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import type { ITask, ITaskState } from "@/types/taskType";
 import { TaskService } from "@/services/taskService";
+import { useAuthStore } from "./authStore";
 
 export const useTaskStore = defineStore("task", () => {
   const taskService = new TaskService();
+  const authStore = useAuthStore();
+  const userId = authStore.userId;
 
   const state: ITaskState = reactive({
     loading: false,
     tasks: [{
-      id: "1",
+      id: 0,
       title: "Caminhar",
       date: "2023-10-01",
       location: "Parque",
@@ -67,7 +70,7 @@ export const useTaskStore = defineStore("task", () => {
   const getTasks = async () => {
     setLoading(true);
     try {
-      const response = await taskService.getTasks();
+      const response = await taskService.getTasks(userId as number);
       state.tasks = response;
     } catch (err) {
       state.error = err;
