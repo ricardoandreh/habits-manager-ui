@@ -5,12 +5,13 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-// import { VitePWA } from 'vite-plugin-pwa'
 
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
+  base: '/habits-manager-ui/',
+  publicDir: 'public',
   plugins: [
     VueRouter({
       dts: 'src/typed-router.d.ts',
@@ -41,42 +42,6 @@ export default defineConfig({
         configFile: 'src/styles/settings.scss',
       },
     }),
-    // VitePWA({
-    //   registerType: 'autoUpdate',
-    //   devOptions: { enabled: true },
-    //   manifest: {
-    //     name: 'My Vuetify PWA',
-    //     short_name: 'VuetifyPWA',
-    //     description: 'A Progressive Web App with Vuetify',
-    //     theme_color: '#1976D2',
-    //     background_color: '#ffffff',
-    //     display: 'standalone',
-    //     icons: [
-    //       {
-    //         src: 'icons/icon-192x192.png',
-    //         sizes: '192x192',
-    //         type: 'image/png'
-    //       },
-    //       {
-    //         src: 'icons/icon-512x512.png',
-    //         sizes: '512x512',
-    //         type: 'image/png'
-    //       }
-    //     ]
-    //   },
-    //   workbox: {
-    //     runtimeCaching: [
-    //       {
-    //         urlPattern: ({ request }) => request.destination === 'document',
-    //         handler: 'NetworkFirst'
-    //       },
-    //       {
-    //         urlPattern: ({ request }) => request.destination === 'script',
-    //         handler: 'CacheFirst'
-    //       }
-    //     ]
-    //   }
-    // }),
     Fonts({
       google: {
         families: [ {
