@@ -45,7 +45,7 @@ export const useAuthStore = defineStore("auth", () => {
         sessionStorage.removeItem("user");
     };
 
-    const createAccount = async (user: IUser) => {
+    const createAccount = async (user: Partial<IUser>) => {
         setLoading(true);
         try {
             const response = await authService.createAccount(user);

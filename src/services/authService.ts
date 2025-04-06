@@ -7,7 +7,7 @@ export class AuthService extends BaseService {
         return this.post<IUser>(AUTH_ROUTES.LOGIN, { email, password }).then(res => res);
     }
 
-    createAccount(user: IUser) {
+    createAccount(user: Partial<IUser>) {
         return this.post<IUser>(AUTH_ROUTES.REGISTER, user).then(res => res);
     }
 }

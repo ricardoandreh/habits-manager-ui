@@ -17,9 +17,9 @@ export const NEW_OBJECTS = {
     },
     USER: {
         id: 0,
-        name: "",
-        email: "",
-        isDarkMode: false,
-        token: null,
+        firstName: '',
+        lastName: '',
+        email: '',
+        isDarkMode: false
     }
 };
