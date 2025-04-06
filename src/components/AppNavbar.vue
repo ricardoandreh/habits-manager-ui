@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    :color="authStore.isDarkMode ? 'grey-darken-4' : 'white'"
+    :color="authStore.isDarkMode ? 'black' : 'white'"
     density="compact"
     class="pa-4"
     elevation="0"
