@@ -1,24 +1,18 @@
 <template>
   <v-footer
-    height="60"
-    class="bg-transparent mt-4 mb-2"
+    height="70"
+    class="bg-transparent mt-16 mb-6"
   >
-    <div
-      class="d-flex flex-column align-center justify-center w-100"
-    >
-      <div
-        class="text-caption"
-      >
+    <div class="d-flex flex-column align-center justify-center w-100">
+      <div class="text-caption text-grey-darken-2 font-weight-medium">
         Projeto Frontend - DEVOPS
       </div>
-      <v-tooltip
-        location="bottom"
-        text="Melhor Equipe"
-      >
+      <v-tooltip location="top" text="Melhor Equipe">
         <template #activator="{ props }">
           <span
-            class="d-block text-caption text-disabled pt-1"
+            class="d-block text-caption text-grey pt-1"
             v-bind="props"
+            style="cursor: pointer"
           >
             Albano, Ricardo, Gomes e Paulão
           </span>
@@ -30,4 +24,5 @@
 
 <script setup lang="ts"></script>
 
-<style scoped lang="css"></style>
+<style scoped>
+</style>

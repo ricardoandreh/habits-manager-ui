@@ -28,12 +28,12 @@
             {{ item.title }}
           </td>
           <td>
-            <span v-if="item.time">
+            <span v-if="item.date">
               <v-icon
                 size="16"
                 class="text-blue-grey"
               >mdi-clock</v-icon>
-              {{ item.time }}
+              {{ item.date }}
             </span>
             <span v-else>
               --
@@ -46,18 +46,6 @@
                 class="text-orange"
               >mdi-map-marker</v-icon>
               {{ item.location }}
-            </span>
-            <span v-else>
-              --
-            </span>
-          </td>
-          <td>
-            <span v-if="item.duration">
-              <v-icon
-                size="16"
-                class="text-success"
-              >mdi-timer</v-icon>
-              {{ item.duration }}
             </span>
             <span v-else>
               --
@@ -99,9 +87,8 @@ const removeTask = (index: number) => {
 const headers = [
   { title: "", value: "icon" },
   { title: "", value: "title" },
-  { title: "", value: "time" },
+  { title: "", value: "date" },
   { title: "", value: "location" },
-  { title: "", value: "duration" },
   { title: "", value: "actions" },
 ]
 </script>

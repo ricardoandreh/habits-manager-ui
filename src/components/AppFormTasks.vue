@@ -130,20 +130,21 @@
           <v-col
             cols="12"
             class="pr-4"
-            md="2"
+            md="5"
           >
             <v-text-field
-              v-model="newTask.time"
+              v-model="newTask.date"
               variant="outlined"
-              label="Horário"
-              type="time"
+              label="Data"
+              type="date"
               placeholder="Ex: 08:00"
+              :min="today"
               :rules="[(v) => !!v || 'Campo obrigatório']"
             />
           </v-col>
           <v-col
             cols="12"
-            class="pr-4"
+            class="pr-2"
             md="3"
           >
             <v-text-field
@@ -156,27 +157,15 @@
           </v-col>
           <v-col
             cols="12"
-            class="pr-4"
+            class="pr-2"
             md="3"
           >
             <v-text-field
-              v-model="newTask.duration"
-              variant="outlined"
-              label="Duração"
-              placeholder="Ex: 1h30"
-              helper-text="Opcional"
-            />
-          </v-col>
-          <v-col
-            cols="12"
-            class="pr-4"
-            md="4"
-          >
-            <v-text-field
-              v-model="newTask.id"
+              v-model="newTask.description"
               variant="outlined"
               label="Observação"
-              type="text"
+              placeholder="Ex: Reunião"
+              helper-text="Opcional"
             />
           </v-col>
         </v-row>
@@ -224,6 +213,8 @@ const resetForm = () => {
 
 
 const colorDialog = ref(false);
+
+const today = new Date().toISOString().split("T")[0]
 
 </script>
 

@@ -1,13 +1,13 @@
 export const NEW_OBJECTS = {
     TASK: {
         title: "",
-        time: "",
+        date: "",
         location: "",
-        duration: "",
         icon: { label: "", value: "" },
         color: "",
         completed: false,
         type: "" as "" | "Movement" | "ActiveMind" | "Recharge",
+        description: "",
     },
     PROGRESS: {
         title: "",
@@ -19,6 +19,7 @@ export const NEW_OBJECTS = {
         id: "",
         name: "",
         email: "",
+        isDarkMode: false,
         token: null,
     }
 };

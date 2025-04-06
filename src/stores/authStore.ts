@@ -3,9 +3,11 @@ import { reactive, computed } from "vue";
 import type { IUser, IAuthState } from "@/types/authType";
 import { AuthService } from "@/services/authService";
 import { NEW_OBJECTS } from "@/constants/newObjects";
+import { useTheme } from "vuetify";
 
 export const useAuthStore = defineStore("auth", () => {
     const authService = new AuthService();
+    const themeStore = useTheme();
 
     const state: IAuthState = reactive({
         loading: false,
@@ -16,6 +18,7 @@ export const useAuthStore = defineStore("auth", () => {
     const isLoading = computed(() => state.loading);
     const isAuthenticated = computed(() => !!state.user.token);
     const error = computed(() => state.error);
+    const isDarkMode = computed(() => state.user.isDarkMode); 
 
     const setLoading = (loading: boolean) => {
         state.loading = loading;
@@ -77,13 +80,29 @@ export const useAuthStore = defineStore("auth", () => {
         }
     }
 
+    const toggleDarkMode = () => {
+        console.log('chegoyu')
+        state.user.isDarkMode = !state.user.isDarkMode;
+        if (state.user.isDarkMode) {
+            document.documentElement.classList.add("dark");
+            themeStore.global.name.value = "dark";
+        } else {
+            document.documentElement.classList.remove("dark");
+            themeStore.global.name.value = "light";
+        }
+        localStorage.setItem("isDarkMode", JSON.stringify(state.user.isDarkMode));
+    };
+
     return {
         isLoading,
         isAuthenticated,
         error,
+        isDarkMode,
+        setLoading,
         login,
         logout,
         initializeUser,
         createAccount,
+        toggleDarkMode,
     };
 });
