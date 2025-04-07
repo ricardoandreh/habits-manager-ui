@@ -75,9 +75,11 @@
               text="Marcar como concluído"
             >
               <template #activator="{ props }">
+                <!-- @change="taskStore.updateTask(task)" -->
                 <v-checkbox
                   v-bind="props"
                   v-model="task.completed"
+                  :color="task.color"
                   density="compact"
                   hide-details
                   class="ml-2"
