@@ -5,7 +5,7 @@
         fluid
         class="text-center pa-4"
       >
-        <div class="d-flex align-center justify-center mb-8">
+        <div class="d-flex align-center justify-center">
           <v-icon
             size="26"
             class="mr-1 d-block pb-9"
@@ -165,7 +165,6 @@
 <style scoped>
   .v-main {
     min-height: 100vh;
-    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
   }
   
   a {

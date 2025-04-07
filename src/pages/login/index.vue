@@ -5,7 +5,7 @@
         fluid
         class="text-center"
       >
-        <div class="d-flex align-center justify-center mb-8">
+        <div class="d-flex align-center justify-center">
           <v-icon
             size="26"
             class="mr-1 d-block pb-9"
@@ -100,6 +100,6 @@ const login = () => {
 <style scoped>
 .v-main {
     min-height: 100vh;
-    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    /* background: linear-gradient(135deg, #E3F2FD, #BBDEFB); */
   }
 </style>
