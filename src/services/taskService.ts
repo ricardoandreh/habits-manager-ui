@@ -3,8 +3,9 @@ import { BaseService } from '@/services/index';
 import type { ITask } from '@/types/taskType';
 
 export class TaskService extends BaseService {
-    async getTasks(userId: number): Promise<ITask[]> {
-        const { results } = await this.get<{ results: ITask[] }>(`${TASKS_BASE}/${userId}/`);
+
+    async getTasks(): Promise<ITask[]> {
+        const { results } = await this.get<{ results: ITask[] }>(`${TASKS_BASE}/`);
         return results;
     }
 

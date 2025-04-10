@@ -84,15 +84,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
 const email = ref("");
 const password = ref("");
 const remember = ref(false);
+const router = useRouter();
 
 const login = () => {
   if (email.value && password.value) {
-    authStore.login(email.value, password.value, remember.value);
+    authStore.login(email.value, password.value, remember.value)
+      .then(() => {
+        router.push('/');
+      })
+      .catch((error) => {
+        console.error('Erro ao fazer login:', error);
+      });
   }
 };
 </script>

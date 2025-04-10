@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 import { reactive, computed } from "vue";
-import type { IUser, IAuthState } from "@/types/authType";
+import type { IUser, IAuthState, IAccessToken } from "@/types/authType";
 import { AuthService } from "@/services/authService";
 import { NEW_OBJECTS } from "@/constants/newObjects";
 import { useTheme } from "vuetify";
+import router from "@/router";
 
 export const useAuthStore = defineStore("auth", () => {
     const authService = new AuthService();
@@ -11,12 +12,13 @@ export const useAuthStore = defineStore("auth", () => {
 
     const state: IAuthState = reactive({
         loading: false,
-        user: { ...NEW_OBJECTS.USER},
+        user: { ...NEW_OBJECTS.USER },
+        accessToken: null,
         error: null,
     });
 
     const isLoading = computed(() => state.loading);
-    const isAuthenticated = computed(() => !!state.user.token);
+    const isAuthenticated = computed(() => !!state.accessToken);
     const error = computed(() => state.error);
     const isDarkMode = computed(() => state.user.isDarkMode); 
     const userId = computed(() => state.user.id);
@@ -28,10 +30,12 @@ export const useAuthStore = defineStore("auth", () => {
     const login = async (username: string, password: string, remember: boolean = false) => {
         setLoading(true);
         try {
-            const response: IUser = await authService.login(username, password);
-            state.user = response;
+            const response: IAccessToken = await authService.login(username, password);
+            state.accessToken = response.accessToken;
             const storage = remember ? localStorage : sessionStorage;
-            storage.setItem("user", JSON.stringify(response));
+            storage.setItem("accessToken", response.accessToken);
+            await router.push("/");
+            getUser();
         } catch (err) {
             state.error = err instanceof Error ? err.message : "Login failed";
         } finally {
@@ -41,21 +45,30 @@ export const useAuthStore = defineStore("auth", () => {
 
     const logout = async () => {
         state.user = { ...NEW_OBJECTS.USER };
+        state.accessToken = null;
         state.error = null;
-        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("accessToken");
+        localStorage.removeItem("accessToken");
+        await router.push("/login");
     };
 
     const createAccount = async (user: Partial<IUser>) => {
         setLoading(true);
         try {
-            const response = await authService.createAccount(user);
-            state.user = response;
-            sessionStorage.setItem("user", JSON.stringify(response));
+            await authService.createAccount(user);
+            await router.push("/login");
         } catch (err) {
-            state.error = err instanceof Error ? err.message : "Account creation failed";
+            state.error =
+                err instanceof Error ? err.message : "Account creation failed";
         } finally {
             setLoading(false);
         }
+    }
+
+    const getUser = async () => {
+        const response = await authService.getUser();
+        state.user = response;
+        console.log(state.user);
     }
 
     const toggleDarkMode = () => {
@@ -71,14 +84,14 @@ export const useAuthStore = defineStore("auth", () => {
     };
 
     const checkUserLoggedIn = () => {
-        const user = sessionStorage.getItem("user");
+        const accessToken = sessionStorage.getItem("accessToken") || localStorage.getItem("accessToken");
         const darkMode = localStorage.getItem("isDarkMode");
-        if (user) {
-            const parsedUser = JSON.parse(user);
-            state.user = { ...state.user, ...parsedUser };  
-            const parsedDarkMode = JSON.parse(darkMode || "false");
-            state.user.isDarkMode = parsedDarkMode;
-            if (parsedDarkMode) {
+        if (accessToken) {
+            const parsedToken = accessToken;
+            state.accessToken = parsedToken;
+            const parsedDarkMode = darkMode || "false";
+            state.user.isDarkMode = parsedDarkMode === "true";
+            if (parsedDarkMode === "true") {
                 document.documentElement.classList.add("dark");
                 themeStore.global.name.value = "dark";
             } else {

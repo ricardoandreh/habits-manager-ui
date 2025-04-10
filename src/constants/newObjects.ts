@@ -21,5 +21,8 @@ export const NEW_OBJECTS = {
         lastName: '',
         email: '',
         isDarkMode: false
+    },
+    ACCESS_TOKEN: {
+        accessToken: '',
     }
 };
